@@ -9,6 +9,7 @@ module.exports = {
     * @param {discord.Interaction} interaction 
     * @param {discord.Client} client
     */
+   
     execute(interaction, client) {
         let cmd = client.commands.find((c) => (c.data.name === interaction.commandName));
         

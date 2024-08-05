@@ -7,6 +7,7 @@ module.exports = {
   /**
   * @param {discord.Client} client
   */
+  
   execute(client) {
     console.log('¡En línea!'.yellow)
   }
