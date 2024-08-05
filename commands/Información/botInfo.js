@@ -1,7 +1,7 @@
-const { ActionRowBuilder, ButtonBuilder, SlashCommandBuilder, EmbedBuilder, ComponentType } = require('discord.js');
-const { version: discordVersion } = require('discord.js');
-const { readdirSync, statSync } = require('fs');
-const { join } = require('path');
+import { ActionRowBuilder, ButtonBuilder, SlashCommandBuilder, EmbedBuilder, ComponentType } from 'discord.js';
+import { version as discordVersion } from 'discord.js';
+import { readdirSync, statSync } from 'fs';
+import { join } from 'path';
 
 // Función para contar los archivos de comandos en subdirectorios
 function countCommandFiles(dir) {
@@ -77,4 +77,4 @@ async function run(client, interaction) {
     }
   }
   
-  module.exports = { data, run };
+  export { data, run };

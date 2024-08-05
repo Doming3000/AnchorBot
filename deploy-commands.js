@@ -1,9 +1,9 @@
-const { Routes, Client, GatewayIntentBits } = require('discord.js');
-const { readdirSync } = require('fs');
-const { REST } = require('@discordjs/rest');
-const dotenv = require('dotenv');
+import { Routes, Client, GatewayIntentBits } from 'discord.js';
+import { readdirSync } from 'fs';
+import { REST } from '@discordjs/rest';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 
 clientId = process.env.CLIENT_ID;
 token = process.env.TOKEN;

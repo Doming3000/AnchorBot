@@ -17,5 +17,6 @@
     "fs": "^0.0.1-security",
     "request": "^2.88.2",
     "virustotal-api": "^1.1.7"
-  }
+  },
+  "type": "module"
 }

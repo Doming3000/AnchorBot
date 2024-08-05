@@ -1,14 +1,6 @@
-const discord = require('discord.js');
+export const name = 'ready';
+export const once = true;
 
-module.exports = {
-  name: 'ready',
-  once: true,
-  
-  /**
-  * @param {discord.Client} client
-  */
-  
-  execute(client) {
-    console.log('¡En línea!'.yellow)
-  }
-};
+export function execute(client) {
+  console.log('¡En línea!'.yellow);
+}

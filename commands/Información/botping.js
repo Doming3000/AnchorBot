@@ -1,16 +1,15 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
+import { SlashCommandBuilder, EmbedBuilder } from "discord.js"
 
-module.exports = {
-  data: new SlashCommandBuilder()
+export const data = new SlashCommandBuilder()
   .setName('botping')
-  .setDescription('Muestra la latencia del bot.'),
+  .setDescription('Muestra la latencia del bot.')
   
-  run (client, interaction) {
-    const embed = new EmbedBuilder()
+export function run(client, interaction) {
+  const embed = new EmbedBuilder()
     .setColor(0x779ecb)
-    .setAuthor({name: 'AnchorBot - botping', iconURL: 'https://cutt.ly/NC1VWyL'})
+    .setAuthor({ name: 'AnchorBot - botping', iconURL: 'https://cutt.ly/NC1VWyL' })
     .setThumbnail('https://cutt.ly/gC1VJ8T')
     .setTitle('🏓 ¡Pong!')
     .setDescription(`- 📡 Mi ping actual es \`${client.ws.ping}ms\`.`)
-    interaction.reply({embeds: [embed], allowedMentions: { repliedUser: false }})
-  }}
+  interaction.reply({ embeds: [embed], allowedMentions: { repliedUser: false } })
+}
