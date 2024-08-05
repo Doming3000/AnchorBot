@@ -5,7 +5,7 @@ import { config } from 'dotenv';
 
 config();
 
-clientId = process.env.CLIENT_ID;
+client = process.env.CLIENT_ID;
 token = process.env.TOKEN;
 
 const client = new Client({
@@ -32,7 +32,7 @@ client.login(token).then(async () => {
   const rest = new REST({ version: '10' }).setToken(token);
   
   for(let id of guilds){
-    rest.put(Routes.applicationGuildCommands(clientId, id), { body: commandsData })
+    rest.put(Routes.applicationGuildCommands(client, id), { body: commandsData })
     .then(() => console.log('Successfully registered application commands.'))
     .catch(console.error);
   }
