@@ -5,8 +5,8 @@ import { config } from 'dotenv';
 
 config();
 
-client = process.env.CLIENT_ID;
-token = process.env.TOKEN;
+const clientId = process.env.CLIENT_ID;
+const token = process.env.TOKEN;
 
 const client = new Client({
   intents: [
@@ -21,20 +21,26 @@ client.login(token).then(async () => {
   const guilds = client.guilds.cache.map(guild => guild.id);
   let commandsData = [];
   
-  readdirSync('./commands').forEach((dir) => {
-    const commands = readdirSync(`./commands/${dir}/`).filter((file) => file.endsWith('.js'));
-    for (const file of commands) {
-      let command = require(`./commands/${dir}/${file}`);
+  // Leer los comandos del directorio ./commands
+  const commandDirs = readdirSync('./commands');
+  for (const dir of commandDirs) {
+    const commandFiles = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith('.js'));
+    for (const file of commandFiles) {
+      const command = await import(`./commands/${dir}/${file}`);
       commandsData.push(command.data.toJSON());
     }
-  }); 
+  }
   
   const rest = new REST({ version: '10' }).setToken(token);
   
-  for(let id of guilds){
-    rest.put(Routes.applicationGuildCommands(client, id), { body: commandsData })
-    .then(() => console.log('Successfully registered application commands.'))
-    .catch(console.error);
+  // Registrar los comandos en cada servidor
+  for (let id of guilds) {
+    try {
+      await rest.put(Routes.applicationGuildCommands(clientId, id), { body: commandsData });
+      console.log(`Successfully registered application commands for guild ${id}.`);
+    } catch (error) {
+      console.error(`Failed to register application commands for guild ${id}.`, error);
+    }
   }
   client.destroy();
-})
+});
