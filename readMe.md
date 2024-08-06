@@ -4,4 +4,4 @@ Este es el código del proyecto de un bot para Discord que no hace casi nada, pe
     node .
 
 # Cargar comandos a los servidores
-    node deploy-commands.js
+    node .\deploy-commands.js
