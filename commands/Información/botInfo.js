@@ -46,7 +46,7 @@ async function run(client, interaction) {
     
     const embed0 = new EmbedBuilder()
     .setColor(0x779ecb)
-    .setAuthor({ name: 'AnchorBot - botinfo', iconURL: 'https://cutt.ly/NC1VWyL' })
+    .setAuthor({ name: 'AnchorBot - botinfo', iconURL: 'https://cdn.discordapp.com/attachments/1008268794612957184/1019572125058740224/AnchorIcon.png?ex=66bd3f49&is=66bbedc9&hm=b1cb9e586864767c57265dd8ab9afdaa2f10fee3ea946e56aa7309e86b788323&'})
     .setThumbnail('https://cutt.ly/aC1VDEo')
     .setTitle("🔎 Menú de ayuda:")
     .setDescription(`**¡Hola! Me llamo Anchor <:Ancla:1007823996538060820>**\nSoy una aplicación privada diseñada para...\nFui puesta en línea <t:${uptime}:R> y cuento con **${commandCount}** comandos.`)
