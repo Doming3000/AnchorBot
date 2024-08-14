@@ -49,7 +49,7 @@ async function run(client, interaction) {
     .setAuthor({ name: 'AnchorBot - botinfo', iconURL: 'https://cutt.ly/NC1VWyL' })
     .setThumbnail('https://cutt.ly/aC1VDEo')
     .setTitle("🔎 Menú de ayuda:")
-    .setDescription(`**¡Hola! Me llamo Anchor <:Ancla:1007823996538060820>**\nSoy una integración privada creada para la **Galactic Crew ☕**.\nFui puesta en línea <t:${uptime}:R> y cuento con **${commandCount}** comandos.`)
+    .setDescription(`**¡Hola! Me llamo Anchor <:Ancla:1007823996538060820>**\nSoy una aplicación privada diseñada para...\nFui puesta en línea <t:${uptime}:R> y cuento con **${commandCount}** comandos.`)
     .addFields(
       { name: "📚 - Versiones", value: `➜ <:Discord:1013285425412046929> **Discord.js**: \`${discordVersion}\`\n➜ <:Nodejs:1013283193484484608> **Node.js**: \`${nodeVersion}\``, inline: true },
       { name: "📃 - Información Adicional:", value: "➜ <:Code:1029920233038827610> **Lenguaje**: Javascript", inline: true });
@@ -70,11 +70,10 @@ async function run(client, interaction) {
       const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button });
       
       collector.on('collect', async (i) => {
-        if (i.customId === 'showcommands') {
-          i.reply({ embeds: [embed1], ephemeral: true, allowedMentions: { repliedUser: false } });
-        }
-      });
-    }
+        if (interaction.customId === 'showcommands') { interaction.reply({ embeds: [embed1], ephemeral: true, allowedMentions: { repliedUser: false } });
+      }
+    });
   }
-  
-  export { data, run };
+}
+
+export { data, run };
