@@ -17,30 +17,52 @@ const client = new Client({
   ]
 });
 
-client.login(token).then(async () => {
-  const guilds = client.guilds.cache.map(guild => guild.id);
+// Función para cargar todos los comandos desde el directorio 'commands'
+async function loadCommands() {
   let commandsData = [];
   
-  // Leer los comandos del directorio ./commands
+  // Leer directorios de comandos
   const commandDirs = readdirSync('./commands');
+  
   for (const dir of commandDirs) {
     const commandFiles = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith('.js'));
+    
     for (const file of commandFiles) {
       const command = await import(`./commands/${dir}/${file}`);
-      commandsData.push(command.data.toJSON());
+      commandsData.push(command.data.toJSON()); // Convertir el comando a JSON
     }
   }
   
+  return commandsData;
+}
+
+// Función para registrar comandos globales
+async function registerGlobalCommands(commandsData) {
   const rest = new REST({ version: '10' }).setToken(token);
   
-  // Registrar los comandos en cada servidor
-  for (let id of guilds) {
-    try {
-      await rest.put(Routes.applicationGuildCommands(clientId, id), { body: commandsData });
-      console.log(`Successfully registered application commands for guild ${id}.`);
-    } catch (error) {
-      console.error(`Failed to register application commands for guild ${id}.`, error);
-    }
+  try {
+    console.log('Registrando comandos globales...');
+    await rest.put(
+      Routes.applicationCommands(clientId), // Registrar comandos globales
+      { body: commandsData }
+    );
+    console.log('Comandos globales registrados con éxito.');
+  } catch (error) {
+    console.error('Error al registrar comandos globales:', error);
   }
-  client.destroy();
+}
+
+// Iniciar sesión con el cliente de Discord y registrar comandos
+client.login(token).then(async () => {
+  try {
+    // Cargar los comandos desde el directorio
+    const commandsData = await loadCommands();
+    
+    // Registrar comandos globales
+    await registerGlobalCommands(commandsData);
+  } catch (error) {
+    console.error('Error durante el proceso de registro de comandos:', error);
+  } finally {
+    client.destroy(); // Cerrar sesión del cliente después de registrar comandos
+  }
 });

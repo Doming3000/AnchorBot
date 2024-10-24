@@ -43,17 +43,16 @@ export function run(client, interaction) {
       
       let embed = new EmbedBuilder()
       .setColor(0x94bf63)
-      .setAuthor({ name: 'AnchorBot - mcskin', iconURL: 'https://cdn.discordapp.com/attachments/1008268794612957184/1019572125058740224/AnchorIcon.png?ex=66bd3f49&is=66bbedc9&hm=b1cb9e586864767c57265dd8ab9afdaa2f10fee3ea946e56aa7309e86b788323&'})
+      .setAuthor({
+        name: `${client.user.username} - ${interaction.commandName}`,
+        iconURL: client.user.displayAvatarURL()
+      })
       .setTitle(`Skin del jugador: ${body.name}`)
       .setDescription(`<:Archivo:1010183980315840562> [Ver skin](${skin})`)
       .setImage(render)
       .setThumbnail(avatar);
       
-      interaction.reply({ 
-        embeds: [embed], 
-        allowedMentions: { repliedUser: false } 
-      });
-      
+      interaction.reply({ embeds: [embed], allowedMentions: { repliedUser: false } });
     } catch (err) {
       interaction.reply({ content: "<:Advertencia:1009954893471162470> No he podido encontrar al jugador.", ephemeral: true, allowedMentions: { repliedUser: false }});
     }

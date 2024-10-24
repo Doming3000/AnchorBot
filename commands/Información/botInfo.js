@@ -46,13 +46,16 @@ async function run(client, interaction) {
     
     const embed0 = new EmbedBuilder()
     .setColor(0x779ecb)
-    .setAuthor({ name: 'AnchorBot - botinfo', iconURL: 'https://cdn.discordapp.com/attachments/1008268794612957184/1019572125058740224/AnchorIcon.png?ex=66bd3f49&is=66bbedc9&hm=b1cb9e586864767c57265dd8ab9afdaa2f10fee3ea946e56aa7309e86b788323&'})
+    .setAuthor({
+      name: `${client.user.username} - ${interaction.commandName}`,
+      iconURL: client.user.displayAvatarURL()
+    })
     .setThumbnail('https://cutt.ly/aC1VDEo')
     .setTitle("🔎 Menú de ayuda:")
-    .setDescription(`**¡Hola! Me llamo Anchor <:Ancla:1007823996538060820>**\nSoy una aplicación privada diseñada para...\nFui puesta en línea <t:${uptime}:R> y cuento con **${commandCount}** comandos.`)
+    .setDescription(`**¡Hola!**\nSoy una aplicación privada diseñada para servidores de confianza.\nFui puesta en línea <t:${uptime}:R> y cuento con **${commandCount}** comandos.`)
     .addFields(
       { name: "📚 - Versiones", value: `➜ <:Discord:1013285425412046929> **Discord.js**: \`${discordVersion}\`\n➜ <:Nodejs:1013283193484484608> **Node.js**: \`${nodeVersion}\``, inline: true },
-      { name: "📃 - Información Adicional:", value: "➜ <:Code:1029920233038827610> **Lenguaje**: Javascript", inline: true });
+      { name: "📃 - Información Adicional:", value: "➜ <:Code:1029920233038827610> **Lenguaje**: Javascript\n➜ 😐 **Dev**: <@811071747189112852>", inline: true });
       
       const embed1 = new EmbedBuilder()
       .setColor(0x779ecb)
@@ -61,8 +64,8 @@ async function run(client, interaction) {
       .setFooter({ text: "¡Haz click en cualquiera! 📅", iconURL: "https://cutt.ly/NC1VWyL" })
       .setTimestamp()
       .addFields(
-        { name: "📑 Información:", value: " </botinfo:1019448323683393657> </botping:1019448323683393658>" },
-        { name: "<:GrassBlock:1013216370839797871> Minecraft:", value: "</download-worlds:1018945516802953337> </mcskin:1017172584267264100>" }
+        { name: "📑 Información:", value: " </botinfo:1298681125497209014> </botping:1298681125497209015>" },
+        { name: "<:GrassBlock:1013216370839797871> Minecraft:", value: "</download-worlds:1298681125497209016> </mcskin:1298681125497209017>" }
       );
       
       let message = await interaction.reply({ embeds: [embed0], components: [row], allowedMentions: { repliedUser: false } });
